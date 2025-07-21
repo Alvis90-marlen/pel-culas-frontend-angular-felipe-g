@@ -1,0 +1,92 @@
+<div class="container mx-auto p-4 font-sans">
+  <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">
+    {{ isEditMode ? 'Editar Película' : 'Crear Nueva Película' }}
+  </h1>
+
+  <form [formGroup]="peliculaForm" (ngSubmit)="onSubmit()" class="bg-white p-8 rounded-lg shadow-lg max-w-2xl mx-auto">
+    
+    <!-- Título -->
+    <div class="mb-4">
+      <label for="titulo" class="block text-gray-700 text-sm font-bold mb-2">Título:</label>
+      <input type="text" id="titulo" formControlName="titulo"
+             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500">
+      <div *ngIf="peliculaForm.get('titulo')?.invalid && peliculaForm.get('titulo')?.touched" class="text-red-500 text-xs mt-1">
+        El título es requerido.
+      </div>
+    </div>
+
+    <!-- Director -->
+    <div class="mb-4">
+      <label for="director" class="block text-gray-700 text-sm font-bold mb-2">Director:</label>
+      <input type="text" id="director" formControlName="director"
+             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500">
+    </div>
+
+    <!-- Año -->
+    <div class="mb-4">
+      <label for="anio" class="block text-gray-700 text-sm font-bold mb-2">Año:</label>
+      <input type="number" id="anio" formControlName="anio"
+             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500">
+      <div *ngIf="peliculaForm.get('anio')?.invalid && peliculaForm.get('anio')?.touched" class="text-red-500 text-xs mt-1">
+        <span *ngIf="peliculaForm.get('anio')?.errors?.['required']">El año es requerido.</span>
+        <span *ngIf="peliculaForm.get('anio')?.errors?.['min'] || peliculaForm.get('anio')?.errors?.['max']">El año debe ser un valor válido.</span>
+      </div>
+    </div>
+
+    <!-- Género -->
+    <div class="mb-4">
+      <label for="genero" class="block text-gray-700 text-sm font-bold mb-2">Género:</label>
+      <input type="text" id="genero" formControlName="genero"
+             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500">
+    </div>
+
+    <!-- Imagen (URL) -->
+    <div class="mb-4">
+      <label for="imagen" class="block text-gray-700 text-sm font-bold mb-2">URL de Imagen:</label>
+      <input type="text" id="imagen" formControlName="imagen"
+             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500">
+    </div>
+
+    <!-- Descripción -->
+    <div class="mb-4">
+      <label for="descripcion" class="block text-gray-700 text-sm font-bold mb-2">Descripción:</label>
+      <textarea id="descripcion" formControlName="descripcion" rows="4"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500"></textarea>
+    </div>
+
+    <!-- Puntaje -->
+    <div class="mb-4">
+      <label for="puntaje" class="block text-gray-700 text-sm font-bold mb-2">Puntaje (0-10):</label>
+      <input type="number" id="puntaje" formControlName="puntaje" step="0.1"
+             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500">
+      <div *ngIf="peliculaForm.get('puntaje')?.invalid && peliculaForm.get('puntaje')?.touched" class="text-red-500 text-xs mt-1">
+        El puntaje debe ser un número entre 0 y 10.
+      </div>
+    </div>
+
+    <!-- Estado -->
+    <div class="mb-6">
+      <label for="estado" class="block text-gray-700 text-sm font-bold mb-2">Estado:</label>
+      <select id="estado" formControlName="estado"
+              class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500">
+        <option value="publicada">Publicada</option>
+        <option value="edicion">Edición</option>
+      </select>
+      <div *ngIf="peliculaForm.get('estado')?.invalid && peliculaForm.get('estado')?.touched" class="text-red-500 text-xs mt-1">
+        El estado es requerido.
+      </div>
+    </div>
+
+    <!-- Botones de acción -->
+    <div class="flex items-center justify-between">
+      <button type="submit"
+              class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75">
+        {{ isEditMode ? 'Actualizar Película' : 'Crear Película' }}
+      </button>
+      <button type="button" (click)="goBack()"
+              class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>
