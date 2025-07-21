@@ -1,59 +1,35 @@
-# PeliculasFrontend
+Este repositorio contiene el frontend desarrollado con Angular para la prueba técnica de Vive Tu SAS.
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.10.
+## Requisitos Previos
 
-## Development server
+* Node.js (versión 18 o superior recomendada)
+* npm (Node Package Manager)
+* Angular CLI (instalar globalmente: `npm install -g @angular/cli`)
 
-To start a local development server, run:
+## Ejecución del Frontend
 
-```bash
-ng serve
-```
+1.  Asegúrate de que el backend de Spring Boot esté ejecutándose en `http://localhost:8080`.
+2.  Clona este repositorio: `git clone https://github.com/Alvis90-marlen/prueba-t-cnica-pel-culas-frontend.git`
+3.  Navega a la carpeta del proyecto: `cd prueba-t-cnica-pel-culas-frontend`
+4.  Instala las dependencias de Node.js: `npm install`
+5.  Inicia la aplicación Angular: `ng serve`
+6.  Abre tu navegador y ve a `http://localhost:4200/peliculas`.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Funcionalidades Implementadas
 
-## Code scaffolding
+* **Área Pública (`/peliculas`):**
+    * Visualización de películas con todos sus detalles.
+    * **Filtro por estado:** Solo se muestran las películas con estado "publicada".
+    * Botón para navegar al área de administración.
+* **Área Administrativa (`/admin/peliculas`):**
+    * Listado de todas las películas (publicadas y en edición).
+    * Botón para "Crear Nueva Película" (`/admin/peliculas/crear`).
+    * Botones para "Editar" (`/admin/peliculas/editar/{id}`) y "Eliminar" películas.
+    * Formulario de creación/edición con validaciones básicas.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Notas Adicionales
 
-```bash
-ng generate component component-name
-```
+* Las funcionalidades de búsqueda por nombre y ordenamiento en el área pública no fueron implementadas debido a limitaciones de tiempo, pero serían los siguientes pasos a desarrollar.
+* Las funcionalidades "extras" (alquiler, microservicios) no fueron implementadas.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
