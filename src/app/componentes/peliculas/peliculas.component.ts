@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms'; // ¡Importa FormsModule para [(ngModel)]!
+// Ya no necesitamos Router aquí si solo cargamos la lista pública
+// import { Router } from '@angular/router';
 import { Pelicula, PeliculaService } from '../../servicios/pelicula.service';
 
 @Component({
@@ -23,7 +24,8 @@ export class PeliculasComponent implements OnInit {
 
   constructor(
     private peliculaService: PeliculaService,
-    private router: Router
+    // Ya no necesitamos Router aquí
+    // private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -48,27 +50,6 @@ export class PeliculasComponent implements OnInit {
     );
   }
 
-  goToAdmin(): void {
-    this.router.navigate(['/admin/peliculas']);
-  }
-
-  editarPelicula(id: number): void {
-    this.router.navigate(['/admin/peliculas/editar', id]);
-  }
-
-  eliminarPelicula(id: number): void {
-    if (confirm('¿Estás seguro de que quieres eliminar esta película?')) {
-      this.peliculaService.eliminarPelicula(id).subscribe(
-        () => {
-          console.log('Película eliminada con éxito');
-          // Recarga la lista de películas con los filtros actuales
-          this.aplicarFiltros();
-        },
-        error => {
-          console.error('Error al eliminar la película:', error);
-          alert('No se pudo eliminar la película. Consulta la consola para más detalles.');
-        }
-      );
-    }
-  }
+  // Métodos goToAdmin, editarPelicula, eliminarPelicula han sido eliminados de aquí
+  // porque ahora se manejarán desde PeliculasAdminComponent (o desde el header general)
 }
