@@ -1,54 +1,48 @@
-Este repositorio contiene el backend desarrollado con Spring Boot para la prueba técnica de Vive Tu SAS.
+Prueba Técnica - Frontend de Películas (Angular)
+Este repositorio contiene el frontend desarrollado con Angular para la prueba técnica de Vive Tu SAS.
 
-## Requisitos Previos
+Requisitos Previos
+Node.js (versión 18 o superior recomendada)
 
-* Java Development Kit (JDK) 17 o superior
-* Apache Maven (generalmente incluido con Spring Boot si usas el Wrapper)
-* MySQL Database
-* Un cliente MySQL (ej. MySQL Workbench, DBeaver)
+npm (Node Package Manager)
 
-## Configuración de la Base de Datos
+Angular CLI (instalar globalmente: npm install -g @angular/cli)
 
-1.  Crea una base de datos MySQL llamada `peliculasdb`.
-2.  Asegúrate de que el usuario y la contraseña de tu base de datos estén configurados en `src/main/resources/application.properties`.
-    ```properties
-    spring.datasource.url=jdbc:mysql://localhost:3306/peliculasdb?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
-    spring.datasource.username=tu_usuario_mysql
-    spring.datasource.password=tu_contraseña_mysql
-    spring.jpa.hibernate.ddl-auto=none # Importante: No recrear la tabla automáticamente
-    spring.jpa.show-sql=true
-    ```
-3.  **Crea la tabla `peliculas` manualmente en tu base de datos MySQL.** Aquí tienes el script SQL (asegúrate de que los tipos de datos coincidan con tu `Pelicula.java`):
+Ejecución del Frontend
+Asegúrate de que el backend de Spring Boot esté ejecutándose en http://localhost:8080.
 
-    ```sql
-    CREATE TABLE peliculas (
-        id BIGINT AUTO_INCREMENT PRIMARY KEY,
-        titulo VARCHAR(255) NOT NULL,
-        director VARCHAR(255),
-        anio INT,
-        genero VARCHAR(255),
-        imagen VARCHAR(500),
-        descripcion TEXT,
-        puntaje DECIMAL(3,1),
-        estado VARCHAR(50) NOT NULL,
-        fecha_creacion DATETIME,
-        fecha_modificacion DATETIME
-    );
-    ```
-4.  **Opcional:** Inserta algunos datos de ejemplo si no lo hiciste a través del frontend.
+Clona este repositorio: git clone https://github.com/Alvis90-marlen/prueba-t-cnica-pel-culas-frontend.git
 
-## Ejecución del Backend
+Navega a la carpeta del proyecto: cd prueba-t-cnica-pel-culas-frontend
 
-1.  Clona este repositorio: `git clone https://github.com/Alvis90-marlen/prueba-t-cnica-peliculas.git`
-2.  Navega a la carpeta del proyecto: `cd prueba-t-cnica-peliculas`
-3.  Abre el proyecto en tu IDE (IntelliJ IDEA, Visual Studio Code con extensiones Java).
-4.  Ejecuta la clase principal `PeliculasApplication.java`.
-5.  El backend se iniciará en `http://localhost:8080`.
+Instala las dependencias de Node.js: npm install
 
-## Endpoints de la API (CRUD)
+Inicia la aplicación Angular: ng serve
 
-* `GET /api/peliculas`: Obtener todas las películas (o filtrar por `?estado=publicada`).
-* `GET /api/peliculas/{id}`: Obtener una película por ID.
-* `POST /api/peliculas`: Crear una nueva película.
-* `PUT /api/peliculas/{id}`: Actualizar una película existente.
-* `DELETE /api/peliculas/{id}`: Eliminar una película.
+Abre tu navegador y ve a http://localhost:4200/peliculas.
+
+Funcionalidades Implementadas
+Área Pública (/peliculas):
+
+Visualización de películas con todos sus detalles.
+
+Filtro por estado: Solo se muestran las películas con estado "publicada".
+
+Búsqueda por título: Permite buscar películas por su nombre.
+
+Ordenamiento: Las películas pueden organizarse por puntaje, título o fecha de creación (ascendente/descendente).
+
+Botón para navegar al área de administración.
+
+Área Administrativa (/admin/peliculas):
+
+Listado de todas las películas (publicadas y en edición).
+
+Botón para "Crear Nueva Película" (/admin/peliculas/crear).
+
+Botones para "Editar" (/admin/peliculas/editar/{id}) y "Eliminar" películas.
+
+Formulario de creación/edición con validaciones básicas.
+
+Notas Adicionales
+Las funcionalidade
