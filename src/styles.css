@@ -1,8 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* src/styles.css */
 
-/* Puedes añadir estilos personalizados aquí si es necesario */
+/* Puedes dejar este archivo vacío o añadir estilos globales muy básicos aquí */
 body {
-  font-family: 'Inter', sans-serif; /* Asegura que la fuente Inter se aplique */
+  margin: 0;
+  padding: 0;
 }
