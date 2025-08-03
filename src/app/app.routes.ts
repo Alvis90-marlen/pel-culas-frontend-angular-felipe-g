@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { PeliculasComponent } from './componentes/peliculas/peliculas.component';
-import { PeliculasAdminComponent } from './componentes/peliculas-admin/peliculas-admin.component'; // Importa el nuevo componente de administración
-import { PeliculaFormComponent } from './componentes/pelicula-form/pelicula-form.component'; // Importa el nuevo componente de formulario
+import { PeliculasAdminComponent } from './componentes/peliculas-admin/peliculas-admin.component';
+import { PeliculaFormComponent } from './componentes/pelicula-form/pelicula-form.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/peliculas', pathMatch: 'full' },

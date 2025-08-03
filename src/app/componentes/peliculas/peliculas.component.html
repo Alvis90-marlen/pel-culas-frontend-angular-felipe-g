@@ -1,128 +1,64 @@
-<div class="container">
-  <h1>Bienvenido a Películas</h1>
+<!-- peliculas.component.html -->
 
-  <div>
-    <h2>Lista de Películas</h2>
-    <!-- Botón para ir a la página de administración/creación -->
-    <button (click)="goToAdmin()">
-      Administrar Películas
-    </button>
-  </div>
+<div class="pagina-peliculas">
+  <h1>Catálogo de Películas</h1>
 
-  <!-- Controles de Búsqueda y Ordenamiento -->
-  <div>
-    <!-- Búsqueda por Título -->
+  <!-- Botón para administrar películas -->
+  <button class="boton-administrar-peliculas" (click)="goToAdmin()">Administrar Películas</button>
+
+  <!-- Controles de búsqueda y ordenamiento -->
+  <div class="controles-busqueda-orden">
     <div>
-      <label for="searchTitle">Buscar por Título:</label>
-      <input type="text" id="searchTitle" [(ngModel)]="searchText" (input)="aplicarFiltros()"
-             placeholder="Ej. Interstellar">
+      <label for="buscarTitulo">Buscar por Título:</label>
+      <input type="text" id="buscarTitulo" placeholder="Ej: Interstellar" [(ngModel)]="searchText" (input)="aplicarFiltros()">
     </div>
-
-    <!-- Ordenar por -->
     <div>
-      <label for="sortBy">Ordenar por:</label>
-      <select id="sortBy" [(ngModel)]="sortBy" (change)="aplicarFiltros()">
+      <label for="ordenarPor">Ordenar por:</label>
+      <select id="ordenarPor" [(ngModel)]="sortBy" (change)="aplicarFiltros()">
         <option value="">Sin Orden</option>
         <option value="titulo">Título</option>
-        <option value="puntaje">Puntaje</option>
-        <option value="fechaCreacion">Fecha de Creación</option>
+        <option value="anio">Año</option>
+        <option value="director">Director</option>
       </select>
     </div>
-
-    <!-- Dirección de Ordenamiento -->
     <div>
-      <label for="sortDirection">Dirección:</label>
-      <select id="sortDirection" [(ngModel)]="sortDirection" (change)="aplicarFiltros()">
+      <label for="direccionOrden">Dirección:</label>
+      <select id="direccionOrden" [(ngModel)]="sortDirection" (change)="aplicarFiltros()">
         <option value="asc">Ascendente</option>
         <option value="desc">Descendente</option>
       </select>
     </div>
   </div>
 
-  <div class="movie-grid">
-    <div *ngFor="let pelicula of peliculas" class="movie-card">
-      <img [src]="pelicula.imagen || 'https://placehold.co/150x200/cccccc/000000?text=Sin+Imagen'"
-           alt="Cubierta de {{ pelicula.titulo }}"
-           onerror="this.onerror=null;this.src='https://placehold.co/150x200/cccccc/000000?text=Sin+Imagen';">
+  <!-- Cuadrícula de películas -->
+  <div class="cuadricula-peliculas">
+    <div class="tarjeta-pelicula" *ngFor="let pelicula of peliculas">
+      <img [src]="pelicula.imagen || 'https://placehold.co/280x250/cccccc/000000?text=Pelicula'" [alt]="pelicula.titulo">
       <h3>{{ pelicula.titulo }}</h3>
-      <p><strong>Director:</strong> {{ pelicula.director }}</p>
-      <p><strong>Año:</strong> {{ pelicula.anio }}</p>
-      <p><strong>Género:</strong> {{ pelicula.genero }}</p>
-      <p><strong>Descripción:</strong> {{ pelicula.descripcion || 'No disponible' }}</p>
-      <p><strong>Puntaje:</strong> {{ pelicula.puntaje || 'N/A' }}</p>
-      <p><strong>Estado:</strong> {{ pelicula.estado || 'Desconocido' }}</p>
-      <p><strong>Creada:</strong> {{ pelicula.fechaCreacion | date:'short' }}</p>
-      <p><strong>Modificada:</strong> {{ pelicula.fechaModificacion | date:'short' }}</p>
-      <!-- Botones de acción para el CRUD (visibles en administración) -->
-      <button (click)="editarPelicula(pelicula.id!)">
-        Editar
-      </button>
-      <button (click)="eliminarPelicula(pelicula.id!)">
-        Eliminar
-      </button>
+      <p>Director: {{ pelicula.director }}</p>
+      <p>Año: {{ pelicula.anio }}</p>
+      <p>Estado: **{{ pelicula.estado | titlecase }}**</p> <!-- Muestra el estado actual -->
+      <div class="grupo-botones">
+        <!-- Botón de Alquilar/Devolver -->
+        <button
+          [ngClass]="{
+            'boton-alquilar': pelicula.estado === 'publicada',
+            'boton-devolver': pelicula.estado === 'alquilada',
+            'boton-deshabilitado': pelicula.estado === 'edicion'
+          }"
+          [disabled]="pelicula.estado === 'edicion'"
+          (click)="alquilarDevolverPelicula(pelicula.id!, pelicula.estado!)">
+          {{ pelicula.estado === 'publicada' ? 'Alquilar' : (pelicula.estado === 'alquilada' ? 'Devolver' : 'En Edición') }}
+        </button>
+        <!-- Botones de Editar y Eliminar (manteniendo la funcionalidad existente) -->
+        <button class="boton-editar" (click)="editarPelicula(pelicula.id!)">Editar</button>
+        <button class="boton-eliminar" (click)="eliminarPelicula(pelicula.id!)">Eliminar</button>
+      </div>
+    </div>
+
+    <!-- Mensaje si no hay películas -->
+    <div *ngIf="peliculas.length === 0" class="no-peliculas-mensaje">
+      <p>No hay películas para mostrar con los filtros actuales.</p>
     </div>
   </div>
 </div>
-
-<!-- Puedes añadir estilos básicos aquí o en peliculas.component.css -->
-<style>
-  .container {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    font-family: sans-serif;
-  }
-  h1, h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  button {
-    background-color: #007bff;
-    color: white;
-    padding: 8px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 10px;
-  }
-  button:hover {
-    background-color: #0056b3;
-  }
-  input[type="text"], select {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-right: 10px;
-  }
-  .movie-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-  }
-  .movie-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .movie-card img {
-    max-width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 5px;
-    margin-bottom: 10px;
-  }
-  .movie-card h3 {
-    font-size: 1.2em;
-    margin-bottom: 5px;
-  }
-  .movie-card p {
-    font-size: 0.9em;
-    color: #555;
-    margin-bottom: 5px;
-  }
-</style>

@@ -1,20 +1,18 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http'; // Importa HttpParams
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-// Define la interfaz para tu modelo Pelicula, incluyendo los nuevos campos
-// Es importante que los nombres de los campos aquí coincidan con los de tu entidad Pelicula.java
 export interface Pelicula {
-  id?: number; // El ID es opcional porque no existe al crear una nueva película
+  id?: number;
   titulo: string;
   director: string;
   anio: number;
   genero: string;
-  imagen?: string; // URL de la imagen (opcional al crear)
+  imagen?: string;
   descripcion?: string;
   puntaje?: number;
-  estado?: string; // 'publicada' o 'edicion'
-  fechaCreacion?: string; // Usamos string para la fecha, Spring Boot lo mapeará a LocalDateTime
+  estado?: string;
+  fechaCreacion?: string;
   fechaModificacion?: string;
 }
 
@@ -22,16 +20,17 @@ export interface Pelicula {
   providedIn: 'root'
 })
 export class PeliculaService {
-  private apiUrl = 'http://localhost:8080/api/peliculas'; // URL base de tu API REST
+  private apiUrl = 'http://localhost:8080/api/peliculas'; 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    console.log('PeliculaService: Servicio inicializado con apiUrl:', this.apiUrl);
+  }
 
-  // Obtener películas, ahora con parámetros opcionales para estado, título, ordenamiento
   getPeliculas(
     estado?: string,
-    titulo?: string, // Nuevo parámetro para búsqueda
-    sortBy?: string, // Nuevo parámetro para ordenamiento
-    sortDirection?: string // Nuevo parámetro para dirección de ordenamiento
+    titulo?: string,
+    sortBy?: string,
+    sortDirection?: string
   ): Observable<Pelicula[]> {
     let params = new HttpParams();
 
@@ -47,27 +46,32 @@ export class PeliculaService {
     if (sortDirection) {
       params = params.set('sortDirection', sortDirection);
     }
-
+    console.log('PeliculaService: Realizando GET a:', this.apiUrl, 'con params:', params.toString());
     return this.http.get<Pelicula[]>(this.apiUrl, { params });
   }
 
-  // Obtener una película por ID (READ BY ID)
   getPeliculaById(id: number): Observable<Pelicula> {
+    console.log('PeliculaService: Realizando GET by ID a:', `${this.apiUrl}/${id}`);
     return this.http.get<Pelicula>(`${this.apiUrl}/${id}`);
   }
 
-  // Crear una nueva película (CREATE)
   crearPelicula(pelicula: Pelicula): Observable<Pelicula> {
+    console.log('PeliculaService: Realizando POST a:', this.apiUrl, 'con datos:', pelicula);
     return this.http.post<Pelicula>(this.apiUrl, pelicula);
   }
 
-  // Actualizar una película existente (UPDATE)
   actualizarPelicula(id: number, pelicula: Pelicula): Observable<Pelicula> {
+    console.log('PeliculaService: Realizando PUT a:', `${this.apiUrl}/${id}`, 'con datos:', pelicula);
     return this.http.put<Pelicula>(`${this.apiUrl}/${id}`, pelicula);
   }
 
-  // Eliminar una película por ID (DELETE)
   eliminarPelicula(id: number): Observable<void> {
+    console.log('PeliculaService: Realizando DELETE a:', `${this.apiUrl}/${id}`);
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+ 
+  alquilarPelicula(id: number): Observable<Pelicula> {
+    console.log('PeliculaService: Realizando PUT para alquilar/devolver a:', `${this.apiUrl}/${id}/alquilar`);
+    return this.http.put<Pelicula>(`${this.apiUrl}/${id}/alquilar`, {});
   }
 }

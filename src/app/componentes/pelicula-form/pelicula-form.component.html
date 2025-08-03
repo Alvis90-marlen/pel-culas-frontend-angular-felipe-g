@@ -5,11 +5,11 @@
 
   <form [formGroup]="peliculaForm" (ngSubmit)="onSubmit()" class="bg-white p-8 rounded-lg shadow-lg max-w-2xl mx-auto">
     
-    <!-- Título -->
+  
     <div class="mb-4">
       <label for="titulo" class="block text-gray-700 text-sm font-bold mb-2">Título:</label>
       <input type="text" id="titulo" formControlName="titulo"
-             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500">
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500">
       <div *ngIf="peliculaForm.get('titulo')?.invalid && peliculaForm.get('titulo')?.touched" class="text-red-500 text-xs mt-1">
         El título es requerido.
       </div>
@@ -19,14 +19,14 @@
     <div class="mb-4">
       <label for="director" class="block text-gray-700 text-sm font-bold mb-2">Director:</label>
       <input type="text" id="director" formControlName="director"
-             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500">
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500">
     </div>
 
     <!-- Año -->
     <div class="mb-4">
       <label for="anio" class="block text-gray-700 text-sm font-bold mb-2">Año:</label>
       <input type="number" id="anio" formControlName="anio"
-             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500">
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500">
       <div *ngIf="peliculaForm.get('anio')?.invalid && peliculaForm.get('anio')?.touched" class="text-red-500 text-xs mt-1">
         <span *ngIf="peliculaForm.get('anio')?.errors?.['required']">El año es requerido.</span>
         <span *ngIf="peliculaForm.get('anio')?.errors?.['min'] || peliculaForm.get('anio')?.errors?.['max']">El año debe ser un valor válido.</span>
@@ -37,14 +37,14 @@
     <div class="mb-4">
       <label for="genero" class="block text-gray-700 text-sm font-bold mb-2">Género:</label>
       <input type="text" id="genero" formControlName="genero"
-             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500">
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500">
     </div>
 
     <!-- Imagen (URL) -->
     <div class="mb-4">
       <label for="imagen" class="block text-gray-700 text-sm font-bold mb-2">URL de Imagen:</label>
       <input type="text" id="imagen" formControlName="imagen"
-             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500">
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500">
     </div>
 
     <!-- Descripción -->
@@ -58,7 +58,7 @@
     <div class="mb-4">
       <label for="puntaje" class="block text-gray-700 text-sm font-bold mb-2">Puntaje (0-10):</label>
       <input type="number" id="puntaje" formControlName="puntaje" step="0.1"
-             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500">
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500">
       <div *ngIf="peliculaForm.get('puntaje')?.invalid && peliculaForm.get('puntaje')?.touched" class="text-red-500 text-xs mt-1">
         El puntaje debe ser un número entre 0 y 10.
       </div>
@@ -71,6 +71,7 @@
               class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500">
         <option value="publicada">Publicada</option>
         <option value="edicion">Edición</option>
+        <option value="alquilada">Alquilada</option> <!-- Nueva opción para el estado de alquiler -->
       </select>
       <div *ngIf="peliculaForm.get('estado')?.invalid && peliculaForm.get('estado')?.touched" class="text-red-500 text-xs mt-1">
         El estado es requerido.

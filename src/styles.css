@@ -1,7 +1,351 @@
 /* src/styles.css */
 
-/* Puedes dejar este archivo vacío o añadir estilos globales muy básicos aquí */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Roboto:wght@300;400;700&display=swap');
+
 body {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif; 
+    background-color: #f0f2f5; 
+    min-height: 100vh; 
+    display: flex; 
+    flex-direction: column; 
+}
+
+.contenedor-principal {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
+}
+.encabezado-principal {
+    position: relative;
+    width: 100%;
+    height: 280px;
+    background-image: url('https://images.unsplash.com/photo-1517604907998-b8344e45c789?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTMyNXwwfDF8c2VhcmNofDEzfHxtb3ZpZSUyMGJhY2tncm91bmR8ZW58MHx8fHwxNjkxNDk0NzU3fDA&ixlib=rb-4.0.3&q=80&w=1080'); /* Imagen de fondo */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden; 
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); 
+}
+.encabezado-principal::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); 
+    backdrop-filter: blur(4px); 
+    -webkit-backdrop-filter: blur(4px); 
+    z-index: 0; 
+}
+.contenido-encabezado {
+    position: relative;
+    z-index: 1; 
+    width: 100%;
+    max-width: 1200px; 
+    padding: 0 20px; 
+    justify-content: space-between; 
+    align-items: center; 
+}
+.marca-app {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.8em; 
+    font-weight: 700; 
+    color: white; 
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); 
+}
+.logo-app {
+    width: 50px;
+    height: 50px;
+    object-fit: contain; 
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6)); 
+}
+.navegacion-principal ul {
+    list-style: none !important; 
+    display: flex; 
+    flex-direction: row; 
+    justify-content: center;
+    gap: 20px; 
+    padding: 0; 
+    margin: 0; 
+}
+.navegacion-principal ul li .boton-navegacion {
+    background-color: rgba(255, 255, 255, 0.25); 
+    color: white; 
+    padding: 12px 25px; 
+    border: 1px solid rgba(255, 255, 255, 0.5); 
+    border-radius: 8px; 
+    cursor: pointer; 
+    text-decoration: none; 
+    font-weight: 500; 
+    transition: all 0.3s ease; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); 
+}
+.navegacion-principal ul li .boton-navegacion:hover {
+    background-color: rgba(255, 255, 255, 0.4); 
+    transform: translateY(-3px); 
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5); 
+}
+
+.area-contenido-principal {
+    flex-grow: 1; 
+    padding: 30px 20px; 
+    max-width: 1200px; 
+    margin: 30px auto; 
+    background-color: #ffffff; 
+    border-radius: 15px; 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); 
+}
+
+h1, h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #2c3e50;
+    font-weight: 700; 
+    font-family: 'Roboto', sans-serif; 
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05); 
+}
+
+
+.boton-administrar-peliculas {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.05em;
+    font-weight: 600;
+    margin-bottom: 30px;
+    display: block; 
+    margin-left: auto;
+    margin-right: auto; 
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.boton-administrar-peliculas:hover {
+    background-color: #0056b3; 
+    transform: translateY(-3px); 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); 
+}
+
+.controles-busqueda-orden {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 25px; 
+    margin-bottom: 30px;
+    justify-content: center; 
+    padding: 20px;
+    border: 1px solid #d0e0e0; 
+    border-radius: 12px;
+    background-color: #f8f8f8; 
+    box-shadow: 0 3px 8px rgba(0,0,0,0.08); 
+}
+
+
+.controles-busqueda-orden label {
+    font-size: 0.85em;
+    color: #444;
+    margin-bottom: 5px;
+    display: block;
+    font-weight: 600;
+}
+
+
+.controles-busqueda-orden > div {
+    flex: 1; 
+    min-width: 220px; 
+}
+
+
+input[type="text"], select {
+    width: 100%;
+    border: 1px solid #bbb;
+    border-radius: 10px;
+    box-sizing: border-box; 
+    font-size: 1em;
+}
+
+.cuadricula-peliculas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+    gap: 35px; 
+    margin-top: 50px;
+}
+
+.tarjeta-pelicula {
+    background-color: #ffffff; 
+    border: 1px solid #e0e0e0; 
+    border-radius: 15px; 
+    padding: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08); 
+    display: flex;
+    flex-direction: column; 
+    justify-content: space-between; 
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; 
+}
+
+.tarjeta-pelicula:hover {
+    transform: translateY(-8px); 
+    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.15); 
+}
+
+
+.tarjeta-pelicula img {
+    max-width: 100%;
+    height: 250px;
+    object-fit: cover; 
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+
+.tarjeta-pelicula h3 {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.tarjeta-pelicula p {
+    font-size: 0.95em;
+    color: #555;
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.tarjeta-pelicula .grupo-botones {
+    display: flex;
+    gap: 15px; 
+    margin-top: 20px;
+    justify-content: center; 
+}
+
+
+.tarjeta-pelicula .boton-editar,
+.tarjeta-pelicula .boton-eliminar 
+.tarjeta-pelicula .boton-alquilar, 
+.tarjeta-pelicula .boton-devolver,
+.tarjeta-pelicula .boton-deshabilitado  {
+    flex: 1;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: 600;
+    color: white;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+
+.tarjeta-pelicula .boton-editar {
+    background-color: #007bff; 
+}
+
+.tarjeta-pelicula .boton-editar:hover {
+    background-color: #6c9dd1; 
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+
+.tarjeta-pelicula .boton-eliminar {
+    background-color: #007bff; 
+}
+
+.tarjeta-pelicula .boton-eliminar:hover {
+    background-color: #6c9dd1; 
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+.tarjeta-pelicula .boton-alquilar {
+    background-color: #28a745; 
+}
+
+.tarjeta-pelicula .boton-alquilar:hover {
+    background-color: #218838; 
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+
+.tarjeta-pelicula .boton-devolver {
+    background-color: #ffc107; 
+    color: #333; 
+}
+
+.tarjeta-pelicula .boton-devolver:hover {
+    background-color: #e0a800; 
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+
+.tarjeta-pelicula .boton-deshabilitado {
+    background-color: #6c757d; 
+    cursor: not-allowed; 
+    opacity: 0.7; 
+}
+
+.tarjeta-pelicula .boton-deshabilitado:hover {
+    transform: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+}
+
+
+footer {
+    background-color: #2c3e50; 
+    color: #ecf0f1; 
+    padding: 20px;
+    margin-top: auto; 
+    text-align: center;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.95em;
+}
+
+
+@media (max-width: 768px) {
+    .contenido-encabezado {
+        flex-direction: column; 
+        gap: 15px;
+        padding: 15px;
+    }
+
+    .navegacion-principal ul {
+        flex-direction: column; 
+        gap: 10px;
+    }
+
+    .navegacion-principal ul li .boton-navegacion {
+        width: 100%; 
+        text-align: center;
+    }
+
+    .area-contenido-principal {
+        margin: 20px 10px; 
+        padding: 20px 15px;
+    }
+
+    .controles-busqueda-orden > div {
+        min-width: 100%; 
+    }
+
+    .cuadricula-peliculas {
+        grid-template-columns: 1fr; 
+    }
 }
